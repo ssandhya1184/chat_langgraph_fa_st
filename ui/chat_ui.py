@@ -16,6 +16,11 @@ if "messages" not in st.session_state:
 if "thread_id" not in st.session_state:
     st.session_state.thread_id = str(uuid.uuid4())
 
+# USer ID
+if "user_id" not in st.session_state:
+    #st.session_state.user_id = str(uuid.uuid4())
+    st.session_state.user_id = "San_User2"
+
 #Approval Status
 if "pending_approval" not in st.session_state:
     st.session_state.pending_approval = None
@@ -39,7 +44,8 @@ if user_input:
                 f"{API_URL}/chat",
                 json = {
                     'message':user_input,
-                    'thread_id':st.session_state.thread_id
+                    'thread_id':st.session_state.thread_id,
+                    'user_id': st.session_state.user_id
                 }).json()
 
             # check if any approval required
@@ -75,6 +81,7 @@ if st.session_state.pending_approval:
                         f"{API_URL}/approve",
                         json = {
                             'thread_id' : st.session_state.thread_id,
+                            'user_id': st.session_state.user_id,
                             'decision' : True
                         }
                     ).json()
@@ -99,6 +106,7 @@ if st.session_state.pending_approval:
                         f"{API_URL}/approve",
                         json = {
                             'thread_id' : st.session_state.thread_id,
+                            'user_id': st.session_state.user_id,
                             'decision' : False
                         }
                     ).json()
@@ -111,17 +119,33 @@ if st.session_state.pending_approval:
                     st.session_state.pending_approval = None
                     st.markdown("❌ Rejected!")
                     st.markdown(res["response"])
-                
-                
 
 
+with st.sidebar:    
+    if st.button("➕ New Chat"):
+        st.session_state.thread_id = str(uuid.uuid4())
+        st.session_state.messages = []
+        st.rerun()
+    st.divider()
 
+    st.title("💬 Recent Chats")
+    chats = requests.get(
+        f"{API_URL}/chats/{st.session_state.user_id}"
+    ).json()
 
+    for chat in chats:
+        if st.button(chat["title"], key=f"chat_{chat['thread_id']}"):
+            thread_id = chat["thread_id"]
+            
+            
+            history = requests.get(
+                f"{API_URL}/chat_history/{thread_id}"
+            ).json()
 
+            st.session_state.thread_id = thread_id
+            st.session_state.messages = history
+            st.session_state.pending_approval = None
 
-
-
-
-
+            st.rerun()
 
            

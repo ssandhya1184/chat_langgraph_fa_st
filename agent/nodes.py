@@ -9,15 +9,24 @@ from agent.agent_state import AgentState
 from agent.utils import sanitize_text
 from langchain_core.messages import HumanMessage,AIMessage
 from langgraph.types import interrupt
+from agent.agent_tools import search_tool
+from langgraph.prebuilt import ToolNode
 
 
 # Model_Node - Invoke LLM with tools
 def model_node(state: AgentState):
     logger.info(f"Entering model Node with state-->{state}")
-    llm_with_tools = get_llm_with_tools()
+    llm_with_tools = get_llm_with_tools().bind_tools([]) # Tentatively disabling tool binding
+    #llm_with_tools = get_llm_with_tools()
     return {
         'messages': llm_with_tools.invoke(state['messages'])
     }
+
+
+def tool_node(state: AgentState):
+    logger.info(f"Entering get_tool_node with state-->{state}")
+    tool_node = ToolNode(tools=[search_tool])
+    return ""
 
 
 #PII Guard Node
@@ -31,8 +40,11 @@ def pii_guard_node(state):
     logger.warning(f"PII Data detected -> {pii_metadata}")
 
     return {
-        "messages" : [HumanMessage(content = clean_text)],
-        "pii_metadata" : pii_metadata
+        "messages": [
+            HumanMessage(content=clean_text)
+        ],
+        "overwrite_messages": True,   # ✅ important
+        "pii_metadata": pii_metadata
     }
 
 

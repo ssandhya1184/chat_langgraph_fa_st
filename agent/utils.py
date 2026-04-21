@@ -60,6 +60,7 @@ def sanitize_text(text: str):
 
 
 def format_response(response: str) -> str:
+    final_text = ""
     last_message = response['messages'][-1].content
     if last_message:
         # This is a list of dict
