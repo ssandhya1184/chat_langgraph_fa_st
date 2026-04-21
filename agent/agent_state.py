@@ -7,5 +7,4 @@ class AgentState(TypedDict,total=False):
     messages: Annotated[list,add_messages]
     pii_metadata: dict | None
     status: Literal["ok", "blocked", "needs_approval"]
-    retries: int
     requires_approval: bool 
