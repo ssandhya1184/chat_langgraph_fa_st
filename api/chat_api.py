@@ -42,7 +42,7 @@ def health_check():
 
 @app.post("/chat")
 def chat_request(req: ChatRequest):
-    logger.info("Entering chat request in chat_api")
+    logger.info(f"Entering chat request in chat_api with request data--> {req}")
     config = {
         "configurable": {
             "thread_id": req.thread_id, 
@@ -51,7 +51,7 @@ def chat_request(req: ChatRequest):
     try:
         result = graph.invoke(
         {
-         "messages": req.message},            
+         "messages": [HumanMessage(content=req.message)]},            
             config=config
         )
         logger.info(f"Response received from graph agent -->{result}")

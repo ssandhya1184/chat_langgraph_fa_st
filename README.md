@@ -1,7 +1,8 @@
-# chat_langgraph_fa_st
+# chat\_langgraph\_fa\_st
+
 Simple Chat application using langgraph, Fast API and StreamLit
 
-agent_project/
+agent\_project/
 │
 ├── app/                        # 🚀 FastAPI backend
 │   ├── api.py                 # FastAPI routes (/chat, /approve)
@@ -13,26 +14,26 @@ agent_project/
 │   ├── state.py               # AgentState schema
 │   │
 │   ├── nodes/                 # 🔧 all nodes (modular)
-│   │   ├── model_node.py
-│   │   ├── hitl_node.py
-│   │   ├── rejection_node.py
-│   │   └── __init__.py
+│   │   ├── model\_node.py
+│   │   ├── hitl\_node.py
+│   │   ├── rejection\_node.py
+│   │   └── **init**.py
 │   │
 │   ├── guards/                # 🛡️ guardrails
-│   │   ├── pii_guard.py
-│   │   ├── input_guard.py
-│   │   ├── tool_guard.py
-│   │   ├── output_guard.py
-│   │   └── __init__.py
+│   │   ├── pii\_guard.py
+│   │   ├── input\_guard.py
+│   │   ├── tool\_guard.py
+│   │   ├── output\_guard.py
+│   │   └── **init**.py
 │   │
 │   ├── routers/               # 🔀 routing logic
-│   │   ├── input_router.py
-│   │   ├── hitl_router.py
-│   │   └── tool_router.py
+│   │   ├── input\_router.py
+│   │   ├── hitl\_router.py
+│   │   └── tool\_router.py
 │   │
 │   └── tools/                 # 🔎 tools (Tavily etc.)
-│       ├── search_tool.py
-│       └── __init__.py
+│       ├── search\_tool.py
+│       └── **init**.py
 │
 ├── services/                  # ⚙️ external integrations
 │   ├── llm.py                 # LLM setup (Gemini/OpenAI)
@@ -44,7 +45,7 @@ agent_project/
 │   ├── components/
 │   │   ├── chat.py
 │   │   ├── badges.py
-│   │   └── hitl_controls.py
+│   │   └── hitl\_controls.py
 │   └── utils.py
 │
 ├── config/                    # ⚙️ configs
@@ -52,11 +53,30 @@ agent_project/
 │   └── prompts.py             # system prompts
 │
 ├── tests/                     # 🧪 tests
-│   ├── test_graph.py
-│   ├── test_guards.py
-│   └── test_api.py
+│   ├── test\_graph.py
+│   ├── test\_guards.py
+│   └── test\_api.py
 │
 ├── .env                       # 🔐 secrets
 ├── requirements.txt
 ├── README.md
 └── main.py                    # optional entry point
+
+
+
+
+
+Important Points:
+
+\----------------
+
+1. Schema Design
+2. Structured Output from LLM
+3. Validate LLM Response
+4. Control LLM's Non Determinism
+5. Prompt Injection
+6. Prompt Versioning
+7. Cost Calculation
+8. PII Detection/Redaction
+9. Fallback/Retry
+

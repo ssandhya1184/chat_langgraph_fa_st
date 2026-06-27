@@ -19,7 +19,7 @@ if "thread_id" not in st.session_state:
 # USer ID
 if "user_id" not in st.session_state:
     #st.session_state.user_id = str(uuid.uuid4())
-    st.session_state.user_id = "San_User2"
+    st.session_state.user_id = "San_User3"
 
 #Approval Status
 if "pending_approval" not in st.session_state:

@@ -15,35 +15,36 @@ from langgraph.prebuilt import ToolNode
 
 # Model_Node - Invoke LLM with tools
 def model_node(state: AgentState):
-    logger.info(f"Entering model Node with state-->{state}")
+    logger.info(f"Entering model Node with state-->{state['messages']}")
     llm_with_tools = get_llm_with_tools().bind_tools([]) # Tentatively disabling tool binding
     #llm_with_tools = get_llm_with_tools()
+    result = llm_with_tools.invoke(state['messages'])
+    logger.info(f"##### Model Node with result -->{result} \n and type --> {type(result)}")
     return {
-        'messages': llm_with_tools.invoke(state['messages'])
+        'messages': [result]
     }
 
 
 def tool_node(state: AgentState):
-    logger.info(f"Entering get_tool_node with state-->{state}")
+    logger.info(f"Entering get_tool_node with state-->{state['messages']}")
     tool_node = ToolNode(tools=[search_tool])
-    return ""
+    return tool_node
 
 
 #PII Guard Node
 def pii_guard_node(state):
-    logger.info(f"Entering pii_guard_node with state->{state}")
+    logger.info(f"Entering pii_guard_node with state->{state['messages']}")
     last_message = state["messages"][-1]
-    logger.info(f"Message from UI -> {last_message.content}")
+    logger.info(f"Message ID of the last mesage is {last_message.id}")
+    
     clean_text, pii_metadata = sanitize_text(last_message.content)
+    logger.info(f"Cleantext-->{clean_text}")
 
     #Logging the redacted PII info
     logger.warning(f"PII Data detected -> {pii_metadata}")
 
     return {
-        "messages": [
-            HumanMessage(content=clean_text)
-        ],
-        "overwrite_messages": True,   # ✅ important
+        "messages": [HumanMessage(content=clean_text,id = last_message.id)],   
         "pii_metadata": pii_metadata
     }
 
@@ -52,6 +53,7 @@ def pii_guard_node(state):
     verify with the user if we can still proceed with the request
 """
 def guard_input_with_hitl(state):
+    logger.info(f"Entering hitl_niode with state-->{state['messages']}")
     risk_words = ["hacking", "violence", "SSN", "jailbreak", "credit card number"]
 
     user_input = state['messages'][-1].content
