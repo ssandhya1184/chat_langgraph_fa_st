@@ -120,28 +120,33 @@ Docker Compose
 ![Chat UI](screenshots/Chat_UI.png)
 
 ---
+### Recent Chats
 
 ![Recent Chats](screenshots/Recent_Chats.png)
 
 ---
+### PII Masking
 
 ![PII Masking](screenshots/PII_Masking.png)
 
 ---
 
 ---
+### HITL Approval
 
-![HITL Approval](screenshots/HITL Approval.png)
+![HITL Approval](screenshots/HITL_Approval.png)
 
 ---
 
 ---
+### HITL Rejection
 
 ![HITL Rejection](screenshots/HITL_Rejection.png)
 
 ---
 
 ---
+### Docker Containers
 
 ![Docker Container](screenshots/Docker_Containers.png)
 
