@@ -130,20 +130,15 @@ Docker Compose
 ![PII Masking](screenshots/PII_Masking.png)
 
 ---
-
----
 ### HITL Approval
 
 ![HITL Approval](screenshots/HITL_Approval.png)
 
----
 
 ---
 ### HITL Rejection
 
 ![HITL Rejection](screenshots/HITL_Rejection.png)
-
----
 
 ---
 ### Docker Containers
