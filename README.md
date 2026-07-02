@@ -117,15 +117,15 @@ Docker Compose
 
 ## Home Page
 
-![Chat UI](screenshots/Chat UI.png)
+![Chat UI](screenshots/Chat_UI.png)
 
 ---
 
-![Recent Chats](screenshots/Recent Chats.png)
+![Recent Chats](screenshots/Recent_Chats.png)
 
 ---
 
-![PII Masking](screenshots/PII Masking.png)
+![PII Masking](screenshots/PII_Masking.png)
 
 ---
 
@@ -143,6 +143,6 @@ Docker Compose
 
 ---
 
-![Docker Container](screenshots/Docker Containers.png)
+![Docker Container](screenshots/Docker_Containers.png)
 
 ---
