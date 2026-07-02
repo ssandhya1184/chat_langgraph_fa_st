@@ -3,6 +3,7 @@
 ![HITL](https://img.shields.io/badge/HITL-Human--in--the--Loop-blue)
 ![PII Guardrails](https://img.shields.io/badge/Guardrails-PII%20Protection-red)
 ![Tool Calling](https://img.shields.io/badge/Tool%20Calling-Tavily-orange)
+
 This project demonstrates a production-style Generative AI assistant built using LangGraph, FastAPI, and Streamlit. The application supports conversational AI with stateful memory, PII masking, Human-in-the-Loop (HITL) approval, persistent chat history, and tool integration using Tavily Search. The entire application is containerized using Docker and can be deployed on AWS.
 
 ## Features

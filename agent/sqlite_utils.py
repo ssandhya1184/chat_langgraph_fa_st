@@ -1,4 +1,5 @@
 import sqlite3
+from pathlib import Path
 from datetime import datetime
 from langgraph.checkpoint.sqlite import SqliteSaver
 from logger_config import setup_logging
@@ -7,11 +8,12 @@ setup_logging()
 import logging
 
 logger = logging.getLogger(__name__)
-
+DB_DIR = Path("db")
 
 def init_db():
+    
     logger.info("Entering init_db")
-    conn = sqlite3.connect("db\chats.db")
+    conn = sqlite3.connect(DB_DIR / "chats.db")
     cursor = conn.cursor()
     print(cursor)
     cursor.execute(
@@ -31,7 +33,7 @@ def init_db():
 
 
 def init_checkpointer():
-    conn = sqlite3.connect('db\checkpoints.db', check_same_thread=False)
+    conn = sqlite3.connect(DB_DIR / 'checkpoints.db', check_same_thread=False)
     saver = SqliteSaver(conn=conn)
     saver.setup()
     return saver
@@ -39,7 +41,7 @@ def init_checkpointer():
 
 def upsert_chat(thread_id,user_id,final_text):
     logger.info(f"Entering upsert_chat->thread_id: {thread_id}, user:id:{user_id}, title:{final_text}")
-    conn = sqlite3.connect("db\\chats.db")
+    conn = sqlite3.connect(DB_DIR / "chats.db")
     cursor = conn.cursor()
     title = final_text[:40] 
     cursor.execute("""
