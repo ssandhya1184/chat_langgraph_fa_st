@@ -1,9 +1,12 @@
 import streamlit as st
 import requests
 import uuid
-import json
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
-API_URL = "http://localhost:8000"
+
+API_URL = os.getenv("API_URL","http://api:8000")
 
 st.set_page_config(page_title="Agent UI", page_icon="🤖")
 st.title("🤖 LangGraph Agent with Guardrails + HITL")

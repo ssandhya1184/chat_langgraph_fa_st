@@ -11,7 +11,7 @@ from langchain_core.messages import HumanMessage,AIMessage
 from langgraph.types import interrupt
 from agent.agent_tools import search_tool
 from langgraph.prebuilt import ToolNode
-
+from utils import STATUS_BLOCKED, STATUS_OK, RISK_WORDS_LIST
 
 # Model_Node - Invoke LLM with tools
 def model_node(state: AgentState):
@@ -54,7 +54,7 @@ def pii_guard_node(state):
 """
 def guard_input_with_hitl(state):
     logger.info(f"Entering hitl_niode with state-->{state['messages']}")
-    risk_words = ["hacking", "violence", "SSN", "jailbreak", "credit card number"]
+    risk_words = RISK_WORDS_LIST
 
     user_input = state['messages'][-1].content
     if any(word in user_input.lower() for word in risk_words):
@@ -70,17 +70,17 @@ def guard_input_with_hitl(state):
         )
         if decision:
             return {                
-                     "status": "ok",
+                     "status": STATUS_OK,
                      "requires_approval": False
                 }
         else:
             return {
             "messages": [AIMessage(content="Request blocked! Please try with other input.")],
-            "status": "blocked",
+            "status": STATUS_BLOCKED,
             "requires_approval": False
         }
     else:
         return {
-            "status": "ok",
+            "status": STATUS_OK,
             "requires_approval": False
         }
