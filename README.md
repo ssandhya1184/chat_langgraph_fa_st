@@ -111,3 +111,38 @@ Docker Compose
 | POST /approve                 | Resume after HITL    |
 | GET /chats/{user_id}          | Recent Chats         |
 | GET /chat_history/{thread_id} | Conversation History |
+
+
+# Application Screenshots
+
+## Home Page
+
+![Chat UI](screenshots/Chat UI.png)
+
+---
+
+![Recent Chats](screenshots/Recent Chats.png)
+
+---
+
+![PII Masking](screenshots/PII Masking.png)
+
+---
+
+---
+
+![HITL Approval](screenshots/HITL Approval.png)
+
+---
+
+---
+
+![HITL Rejection](screenshots/HITL_Rejection.png)
+
+---
+
+---
+
+![Docker Container](screenshots/Docker Containers.png)
+
+---
